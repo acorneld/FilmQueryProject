@@ -1,14 +1,7 @@
 package com.skilldistillery.filmquery.entities;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 // Classes that represent database entries
 public class Film {
@@ -27,6 +20,7 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
+	private List<Actor> actorsInFilm;
 //End Declarations
 
 // Constructors
@@ -64,6 +58,17 @@ public class Film {
 	}
 
 //BEGIN G&S *************
+	
+	public List<Actor> getActorsInFilm() {
+		return actorsInFilm;
+	}
+
+
+	public void setActorsInFilm(List<Actor> actorsInFilm) {
+		this.actorsInFilm = actorsInFilm;
+	}
+
+
 	public int getId() {
 		return id;
 	}

@@ -44,6 +44,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacementCost(rs.getDouble("replacement_cost"));
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
+				film.setActorsInFilm(findActorsByFilmId(filmId));
 			}
 			ps.close();
 			rs.close();
@@ -91,13 +92,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, filmId);
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-
+			while (rs.next()) {
+				
 				Actor actor = new Actor();
-				while (rs.next()) {
-					actorsInFilm.add(actor);
-				}
-
+				actor.setId(rs.getInt("id"));
+				actor.setfName(rs.getString("first_name"));
+				actor.setlName(rs.getString("last_name"));
+				actorsInFilm.add(actor);
 			}
 			ps.close();
 			rs.close();
@@ -111,9 +112,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return actorsInFilm;
 	}
 
-	
 //END METHODS *******
-	
+
 	static {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
