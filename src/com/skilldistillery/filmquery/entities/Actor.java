@@ -52,7 +52,7 @@ public class Actor {
 
 	@Override
 	public String toString() {
-		return "Actor [id=" + id + ", fName=" + fName + ", lName=" + lName + "]";
+		return "Actor" + " First Name= " + fName + ", Last Name= " + lName;
 	}
 
 	@Override

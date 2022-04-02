@@ -40,7 +40,6 @@ public class FilmQueryApp {
 		menu();
 		int choice = 0;
 		choice = input.nextInt();
-		// input.close();
 		return choice;
 	}
 
@@ -54,32 +53,43 @@ public class FilmQueryApp {
 
 	private void menuChoice(int choice) {
 		Scanner kb = new Scanner(System.in);
-		switch (choice) {
-		case 1:
-			System.out.println("Please enter the Film's ID: ");
-			int filmId = kb.nextInt();
-			Film filmResult = db.findFilmById(filmId);
-			if (filmResult != null) {
-				System.out.println(filmResult);
-			} else {
-				System.out.println("I'm sorry, there is no Film by this ID.");
-			}
-			kb.close();
-			break;
-		
-		case 2:
-			System.out.println("Please enter the search Keyword");
-			String keyword = kb.nextLine();
-			Film keywordResult = db.findFilmByKeyword(keyword);
-			if(keywordResult != null) {
-				System.out.println(keywordResult);
+		if (choice >= 1 && choice <= 3) {
+			switch (choice) {
+			case 1:
+				System.out.println("Please enter the Film's ID: ");
+				int filmId = kb.nextInt();
+				Film filmResult = db.findFilmById(filmId);
+				if (filmResult != null) {
+					System.out.println(filmResult);
+				} else {
+					System.out.println("I'm sorry, there is no Film by this ID.");
+				}
 				break;
-			}else {
-				System.out.println("I'm sorry, no Films match these Keywords.  Do Better.");
+
+			case 2:
+				System.out.println("Please enter the search Keyword");
+				String keyword = kb.nextLine();
+				Film keywordResult = db.findFilmByKeyword(keyword);
+				if (keywordResult != null) {
+					System.out.println(keywordResult);
+					break;
+				} else {
+					System.out.println("I'm sorry, no Films match these Keywords.  Do Better.");
+				}
+				break;
+			case 3:
+				System.out.println("Application Exiting");
+				System.out.println(".");
+				System.out.println("..");
+				System.out.println("...");
+				System.out.println("....");
+				System.out.println("Goodbye.");
+				break;
 			}
-			kb.close();
-			break;
+		}else{
+			System.out.println("Invalid Selection");
 		}
+		kb.close();
 	}
 //END METHODS*************
 }
