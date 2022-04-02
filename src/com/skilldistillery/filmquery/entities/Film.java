@@ -3,13 +3,12 @@ package com.skilldistillery.filmquery.entities;
 import java.util.List;
 import java.util.Objects;
 
-// Classes that represent database entries
 public class Film {
 
 //Begin Declarations
 	
 	private int id;
-	
+	private String languageName;
 	private String title;
 	private String description ;
 	private Integer releaseYear;
@@ -29,7 +28,7 @@ public class Film {
 	}
 
 	
-	public Film(int id, String title, String description, Integer releaseYear, int languageId, int rentalDuration,
+	public Film(int id, String languageName, String title, String description, Integer releaseYear, int languageId, int rentalDuration,
 			double rentalRate, Integer length, double replacementCost, String rating, String specialFeatures) {
 		super();
 		this.id = id;
@@ -156,11 +155,23 @@ public class Film {
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
 	}
+	
+	public String getLanguageName() {
+		return languageName;
+	}
+	
+	
+	public void setLanguageName(String languageName) {
+		this.languageName = languageName;
+	}
+	
 //END G&S **************
 
 
 
-//HASHCODE
+
+
+	//HASHCODE
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -182,7 +193,7 @@ public class Film {
 	@Override
 	public String toString() {
 		return "Title= " + title + " Description= " + description + " Release Year= " + releaseYear
-				+ " Rating= " + rating;
+				+ " Rating= " + rating + " Language= " + languageName;
 	}
 
 }
