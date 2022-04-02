@@ -1,6 +1,7 @@
 package com.skilldistillery.filmquery.app;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
@@ -19,7 +20,9 @@ public class FilmQueryApp {
 //    app.menu();
 //    app.test();
 //    app.launch();
+		app.menuChoice(app.launch());
 	}
+
 //BEGIN METHODS ********
 	private void test() {
 		Film film = db.findFilmById(1);
@@ -37,7 +40,7 @@ public class FilmQueryApp {
 		menu();
 		int choice = 0;
 		choice = input.nextInt();
-		input.close();
+		// input.close();
 		return choice;
 	}
 
@@ -48,13 +51,34 @@ public class FilmQueryApp {
 		System.out.println("2. Look up Film by Keyword");
 		System.out.println("3. Exit the Application");
 	}
-	
+
 	private void menuChoice(int choice) {
-		switch(choice) {
+		Scanner kb = new Scanner(System.in);
+		switch (choice) {
 		case 1:
-			Scanner kb = new Scanner(System.in);
 			System.out.println("Please enter the Film's ID: ");
-			
+			int filmId = kb.nextInt();
+			Film filmResult = db.findFilmById(filmId);
+			if (filmResult != null) {
+				System.out.println(filmResult);
+			} else {
+				System.out.println("I'm sorry, there is no Film by this ID.");
+			}
+			kb.close();
+			break;
+		
+		case 2:
+			System.out.println("Please enter the search Keyword");
+			String keyword = kb.nextLine();
+			Film keywordResult = db.findFilmByKeyword(keyword);
+			if(keywordResult != null) {
+				System.out.println(keywordResult);
+				break;
+			}else {
+				System.out.println("I'm sorry, no Films match these Keywords.  Do Better.");
+			}
+			kb.close();
+			break;
 		}
 	}
 //END METHODS*************

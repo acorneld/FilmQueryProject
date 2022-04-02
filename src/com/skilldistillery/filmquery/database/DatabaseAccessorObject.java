@@ -56,7 +56,43 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return film;
 	}
+	
+	@Override
+	public Film findFilmByKeyword(String keyword) {
+		Film film = null;
+		keyword = "%" + keyword + "%";
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			String sql = "SELECT id, title, description, release_year,"
+					+ "language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features FROM film WHERE title LIKE ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				film = new Film();
+				film.setId(rs.getInt("id"));
+				film.setTitle(rs.getString("title"));
+				film.setDescription(rs.getString("description"));
+				film.setReleaseYear(rs.getInt("release_year"));
+				film.setLanguageId(rs.getInt("language_id"));
+				film.setRentalDuration(rs.getInt("rental_duration"));
+				film.setRentalRate(rs.getDouble("rental_rate"));
+				film.setLength(rs.getInt("length"));
+				film.setReplacementCost(rs.getDouble("replacement_cost"));
+				film.setRating(rs.getString("rating"));
+				film.setSpecialFeatures(rs.getString("special_features"));
+			}
+			ps.close();
+			rs.close();
+			conn.close();
+		}
 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return film;
+	}
+	
 	public Actor findActorById(int actorId) {
 		Actor actor = null;
 		try {
@@ -93,7 +129,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			ps.setInt(1, filmId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				
+
 				Actor actor = new Actor();
 				actor.setId(rs.getInt("id"));
 				actor.setfName(rs.getString("first_name"));
@@ -112,6 +148,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return actorsInFilm;
 	}
 
+	
 //END METHODS *******
 
 	static {
@@ -124,5 +161,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			throw new RuntimeException("Unable to load MYSQL driver class");
 		}
 	}
+
+
+	
 
 }
