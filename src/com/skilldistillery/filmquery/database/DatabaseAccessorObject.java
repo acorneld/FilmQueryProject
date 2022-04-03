@@ -65,9 +65,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			String sql = "SELECT id, title, description, release_year,"
-					+ "language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features FROM film WHERE title LIKE ?";
+					+ "language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features FROM film WHERE title LIKE ? OR description LIKE ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, keyword);
+			ps.setString(2, keyword);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				film = new Film();
@@ -75,6 +76,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setTitle(rs.getString("title"));
 				film.setDescription(rs.getString("description"));
 				film.setReleaseYear(rs.getInt("release_year"));
+				
 				film.setLanguageId(rs.getInt("language_id"));
 				film.setRentalDuration(rs.getInt("rental_duration"));
 				film.setRentalRate(rs.getDouble("rental_rate"));
