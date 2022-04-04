@@ -131,7 +131,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			ps.setInt(1, filmId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-
+//
 				Actor actor = new Actor();
 				actor.setId(rs.getInt("id"));
 				actor.setfName(rs.getString("first_name"));
