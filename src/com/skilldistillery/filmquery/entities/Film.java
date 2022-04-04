@@ -46,7 +46,16 @@ public class Film {
 // End Constructors
 	
 	
-
+//BEGIN METHODS*******
+	public String showAll() {
+	return	"ID=" + id + " Title= " + title + " Description= " + description + " Release Year= " + releaseYear
+		+ " Language ID= " + languageId + " Rental Duration= " + rentalDuration + " Rental Rate= " + rentalRate 
+		+ " Length= " + length + " Replacement Cost= " + replacementCost + " Rating= " + rating + " Language= " + languageName 
+		+ " Special Features" + specialFeatures + " Actors In Film: " + actorsInFilm;
+	
+	}
+	
+//END METHODS*******
 
 
 

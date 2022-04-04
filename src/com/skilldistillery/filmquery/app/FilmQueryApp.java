@@ -61,6 +61,19 @@ public class FilmQueryApp {
 				Film filmResult = db.findFilmById(filmId);
 				if (filmResult != null) {
 					System.out.println(filmResult);
+					while(choice <= 1) {
+						int choice2 = 0;
+						System.out.println("1. Return to the Main Menu");
+						System.out.println("2. View all Film Details");
+						choice2 = kb.nextInt();
+						if(choice2 >= 1) {
+							choice = 2;
+							menuChoice(launch());
+						}else if(choice <= 2){
+							filmResult.showAll();
+						}
+					}
+					break;
 				} else {
 					System.out.println("I'm sorry, there is no Film by this ID.");
 				}
