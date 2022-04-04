@@ -20,7 +20,11 @@ Eclipse IDE
 Java 1.8
 Atom Text Editor
 Terminal: zsh and MYSQL
+MAMP Free
+Github
+Terminal (zsh)
 
 Lessons Learned
 
 Making sure to implement the unique syntax of "%" + "variable" + "%" was something that left me hung on the keyword search implementation.  New tables created by joins must have a variable declared in the object class that will allow for assignment of newly accessible table variables.
+All information can just be pulled from database and then we can adjust what the user sees based on new methods or toStrings.
